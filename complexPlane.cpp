@@ -7,7 +7,7 @@ ComplexPlane::ComplexPlane(int pixelSize, int pixelHeight)
     m_plane_size = {BASE_WIDTH,BASE_HEIGHT * m_aspectRatio};
     m_zoomCount = 0;
     m_state = State::CALCULATING;
-    // Init VertexArray
+    // TODO - Init VertexArray
 }
         
 void updateRender();
