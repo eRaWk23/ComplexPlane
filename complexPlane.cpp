@@ -1,17 +1,17 @@
 #include "complexPlane.h"
 #include <cmath>
 
-ComplexPlane::ComplexPlane(int pixelSize, int pixelHeight)
+ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
-    m_pixel_size = {pixelSize, pixelHeight};
-    m_aspectRatio = static_cast<float>(pixelHeight)/pixelSize;
+    m_pixel_size = {pixelWidth, pixelHeight};
+    m_aspectRatio = static_cast<float>(pixelHeight)/pixelWidth;
     m_plane_center = {0,0};
     m_plane_size = {BASE_WIDTH,BASE_HEIGHT * m_aspectRatio};
     m_zoomCount = 0;
     m_state = State::CALCULATING;
-    // TODO - Init VertexArray
+    // Init VertexArray
     m_vArray.setPrimitiveType(sf::Points);
-    m_vArray.resize(pixelSize * pixelHeight);
+    m_vArray.resize(pixelWidth * pixelHeight);
 }
         
 void ComplexPlane::updateRender()
@@ -26,7 +26,7 @@ void ComplexPlane::updateRender()
                 sf::Vector2f coord = mapPixelToCoords(sf::Vector2i(j,i));
                 size_t iterations = countIterations(coord);
                 Uint8 r,g,b;
-                iterationToRGB(iterations, g, b);
+                iterationToRGB(iterations,r, g, b);
             }
         }
     }
@@ -76,10 +76,14 @@ void ComplexPlane::loadText(Text& Text)
 
 }
 
-size_t ComplexPlane::countIterations(Vector2f coord)
+int ComplexPlane::countIterations(Vector2f coord)
 {
     return 0;
 }
 
 Vector2f mapPixelToCoords(Vector2i mousePixel);
-void iterationToRGB(size_t count, Uint8& g, Uint8& b);
+
+void iterationToRGB(size_t count, Uint8& g, Uint8& b)
+{
+
+}
