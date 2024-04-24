@@ -16,7 +16,7 @@ int main()
 
     // construct text objects
     sf::Font font;
-    font.loadFromFile("");// need to get text file //
+    font.loadFromFile("Roboto-Light.ttf");// need to get text file //
     sf::Text text("", font, 16);
     text.setFillColor(sf::Color::White);
 
