@@ -1,4 +1,5 @@
-#include"complexPlane.h"
+#include "complexPlane.h"
+#include <cmath>
 
 ComplexPlane::ComplexPlane(int pixelSize, int pixelHeight)
 {
@@ -31,49 +32,51 @@ void ComplexPlane::updateRender()
     }
 }
 
-void zoomIn()
+void ComplexPlane::zoomIn()
 {
     ++m_zoomCount;
 
     float zoomFactor = pow(BASE_ZOOM, m_zoomCount);
     float newWidth = BASE_WIDTH * zoomFactor;
-    float newHeight = BASE_HEIGHT * m_aspect * zoomFactor;
+    float newHeight = BASE_HEIGHT * m_aspectRatio * zoomFactor;
     m_plane_size = {newWidth, newHeight};
 
     m_state = State::CALCULATING;
 
 }
 
-void zoomOut()
+void ComplexPlane::zoomOut()
 {
     --m_zoomCount;
     float zoomFactor = pow(BASE_ZOOM, m_zoomCount);
     float newWidth = BASE_WIDTH * zoomFactor;
-    float newHeight = BASE_HEIGHT * m_aspect * zoomFactor;
+    float newHeight = BASE_HEIGHT * m_aspectRatio * zoomFactor;
     m_plane_size = {newWidth, newHeight};
 
     m_state = State::CALCULATING;
 
 }
 
-void setCenter(Vector2i mousePixel)
+void ComplexPlane::setCenter(Vector2i mousePixel)
 {
     sf::Vector2f coords = mapPixelToCoords(mousePixel);
     m_plane_center = coords;
     m_state = State::CALCULATING;
 }
 
-void setMouseLocation(Vector2i mousePixel)
+void ComplexPlane::setMouseLocation(Vector2i mousePixel)
 {
-    m_mouseLocation = mapPixelToCoords(mousePixel);
+    Vector2f coords = mapPixelToCoords(mousePixel);
+    m_mouseLocation.x = static_cast<int>(coords.x);
+    m_mouseLocation.y = static_cast<int>(coords.y);
 }
 
-void loadText(Text& Text)
+void ComplexPlane::loadText(Text& Text)
 {
 
 }
 
-size_t countIterations(Vector2f coord)
+size_t ComplexPlane::countIterations(Vector2f coord)
 {
     return 0;
 }

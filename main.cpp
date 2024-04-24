@@ -1,6 +1,6 @@
-#include<SFML/Graphics.hpp>
-#include"complexPlane.h"
-#include<iostream>
+#include <SFML/Graphics.hpp>
+#include "complexPlane.h"
+#include <iostream>
 
 int main()
 {
