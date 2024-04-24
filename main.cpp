@@ -32,18 +32,37 @@ int main()
             }
             else if (event.type == sf::Event::MouseButtonPressed)
             {
-                if(event.mouseButton.button == sf::Event::Right)
+                if(event.mouseButton.button == sf::Mouse::Right)
                 {
                     complexPlane.zoomOut();
                     complexPlane.setCenter(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
                 }
-                else if (event.mouseButton.button == sf::Event::MouseLeft)
+                else if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     complexPlane.zoomIn();
                     complexPlane.setCenter(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
                 }
             }
+            else if (event.type == sf::Event::MouseMoved)
+            {
+                complexPlane.setMouseLocation(sf::Vector2i(event.mouseMove.x, event.mouseMove.y));
+            }
         }
+        //check if escape key was pressed
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            window.close();
+        }
+
+        //Update scene
+        complexPlane.updateRender();
+        complexPlane.loadText(text);
+
+        //draw scene
+        window.clear();
+        window.draw(complexPlane);
+        window.draw(text);
+        window.display();
     }
     return 0;
 }

@@ -30,6 +30,7 @@ void ComplexPlane::updateRender()
         }
     }
 }
+
 void zoomIn()
 {
     ++m_zoomCount;
@@ -42,6 +43,7 @@ void zoomIn()
     m_state = State::CALCULATING;
 
 }
+
 void zoomOut()
 {
     --m_zoomCount;
@@ -53,23 +55,28 @@ void zoomOut()
     m_state = State::CALCULATING;
 
 }
+
 void setCenter(Vector2i mousePixel)
 {
     sf::Vector2f coords = mapPixelToCoords(mousePixel);
     m_plane_center = coords;
     m_state = State::CALCULATING;
 }
+
 void setMouseLocation(Vector2i mousePixel)
 {
     m_mouseLocation = mapPixelToCoords(mousePixel);
 }
+
 void loadText(Text& Text)
 {
 
 }
+
 size_t countIterations(Vector2f coord)
 {
     return 0;
 }
+
 Vector2f mapPixelToCoords(Vector2i mousePixel);
 void iterationToRGB(size_t count, Uint8& g, Uint8& b);
