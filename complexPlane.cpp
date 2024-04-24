@@ -25,16 +25,51 @@ void ComplexPlane::updateRender()
                 sf::Vector2f coord = mapPixelToCoords(sf::Vector2i(j,i));
                 size_t iterations = countIterations(coord);
                 Uint8 r,g,b;
-                iterationToRGB(iterations, r, g, b);
+                iterationToRGB(iterations, g, b);
             }
         }
     }
 }
-void zoomIn();
-void zoomOut();
-void setCenter(Vector2i mousePixel);
-void setMouseLocation(Vector2i mousePixel);
-void loadText(Text& Text);
-size_t countIterations(Vector2f coord);
+void zoomIn()
+{
+    ++m_zoomCount;
+
+    float zoomFactor = pow(BASE_ZOOM, m_zoomCount);
+    float newWidth = BASE_WIDTH * zoomFactor;
+    float newHeight = BASE_HEIGHT * m_aspect * zoomFactor;
+    m_plane_size = {newWidth, newHeight};
+
+    m_state = State::CALCULATING;
+
+}
+void zoomOut()
+{
+    --m_zoomCount;
+    float zoomFactor = pow(BASE_ZOOM, m_zoomCount);
+    float newWidth = BASE_WIDTH * zoomFactor;
+    float newHeight = BASE_HEIGHT * m_aspect * zoomFactor;
+    m_plane_size = {newWidth, newHeight};
+
+    m_state = State::CALCULATING;
+
+}
+void setCenter(Vector2i mousePixel)
+{
+    sf::Vector2f coords = mapPixelToCoords(mousePixel);
+    m_plane_center = coords;
+    m_state = State::CALCULATING;
+}
+void setMouseLocation(Vector2i mousePixel)
+{
+    m_mouseLocation = mapPixelToCoords(mousePixel);
+}
+void loadText(Text& Text)
+{
+
+}
+size_t countIterations(Vector2f coord)
+{
+    return 0;
+}
 Vector2f mapPixelToCoords(Vector2i mousePixel);
 void iterationToRGB(size_t count, Uint8& g, Uint8& b);
